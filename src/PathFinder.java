@@ -47,9 +47,9 @@ public class PathFinder extends Application {
     private static final String SAVE_FILE_NAME = "europa.graph";
     private static final String IMAGE_FILE_NAME = "file:europa.gif";
     private ListGraph<CustomCircle> listGraph = new ListGraph<>();
+    private Pane centerPane = new Pane();
     private Stage stage;
     private BorderPane root;
-    private Pane centerPane = new Pane();
     private boolean unSavedChanges;
     private ImageView imageView;
     private CustomCircle circle1;
@@ -154,17 +154,19 @@ public class PathFinder extends Application {
                 ArrayList<CustomCircle> nodes = new ArrayList<>(listGraph.getNodes());
 
                 for (int i = 0; i < nodes.size(); i++) {
+                    String name = nodes.get(i).getName();
+                    String positionX = Double.toString(nodes.get(i)
+                            .getxPos());
+                    String positionY = Double.toString(nodes.get(i)
+                            .getyPos());
+
                     if (i == nodes.size() - 1)
                         writer.write(
-                                String.format("%s;%s;%s", nodes.get(i).getName(), Double.toString(nodes.get(i)
-                                        .getxPos()),
-                                        Double.toString(nodes.get(i).getyPos())));
+                                String.format("%s;%s;%s", name, positionX, positionY));
                     else
                         writer.write(
                                 String.format(
-                                        "%s;%s;%s;", nodes.get(i).getName(), Double.toString(nodes.get(i)
-                                                .getxPos()),
-                                        Double.toString(nodes.get(i).getyPos())));
+                                        "%s;%s;%s;", name, positionX, positionY));
                 }
                 writer.newLine();
 
